@@ -1,7 +1,4 @@
-"""
-Module with logic to copy and rename files provided in arguments into directories named after
-file type.
-"""
+"""Module with logic to copy and rename files provided in arguments into directories named after file type."""
 
 import os
 import os.path
@@ -16,7 +13,8 @@ PARENT_DESTINATION_DIR = 'processed_files_dir'
 if not os.path.isdir(PARENT_DESTINATION_DIR):
     os.mkdir(PARENT_DESTINATION_DIR)
 
-print(f'File(s) will be saved to this destination: {os.getcwd()}/{PARENT_DESTINATION_DIR}')
+print(
+    f'File(s) will be saved to this destination: {os.getcwd()}/{PARENT_DESTINATION_DIR}')
 
 files_to_rename = sys.argv[1:]
 file_count = len(files_to_rename)
@@ -38,9 +36,11 @@ for original_file_path in files_to_rename:
     if not os.path.isdir(destination_path):
         os.mkdir(destination_path)
 
-    modified_datetime_formatted = time.strftime("%Y-%m-%d %H.%M.%S", time.strptime(time.ctime(os.path.getmtime(original_file_path))))
+    modified_datetime_formatted = time.strftime(
+        "%Y-%m-%d %H.%M.%S", time.strptime(time.ctime(os.path.getmtime(original_file_path))))
     try:
-        copy2(original_file_path, get_unique_file_path(f'{destination_path}/{modified_datetime_formatted}', file_extension))
+        copy2(original_file_path, get_unique_file_path(
+            f'{destination_path}/{modified_datetime_formatted}', file_extension))
 
     except (PermissionError, SameFileError):
         failed_files.add(original_file_path)
