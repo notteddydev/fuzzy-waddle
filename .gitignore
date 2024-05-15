@@ -1,1 +1,4 @@
 __pycache__/
+
+/fuzzywaddle/processed/*
+!/fuzzywaddle/processed/.gitkeep
