@@ -7,7 +7,7 @@ import time
 
 from pathlib import Path
 from shutil import copy2, SameFileError
-from modules.get_unique_file_path import get_unique_file_path
+from curlywaffle.main import get_unique_file_path
 
 PARENT_DESTINATION_DIR = 'processed_files_dir'
 
@@ -39,9 +39,10 @@ for original_file_path in files_to_rename:
 
     modified_datetime_formatted = time.strftime(
         "%Y-%m-%d %H.%M.%S", time.strptime(time.ctime(os.path.getmtime(original_file_path))))
+    
+    proposed_file_path = f'{destination_path}/{modified_datetime_formatted}{file_extension}'
     try:
-        copy2(original_file_path, get_unique_file_path(
-            f'{destination_path}/{modified_datetime_formatted}', file_extension))
+        copy2(original_file_path, get_unique_file_path(proposed_file_path))
 
     except (PermissionError, SameFileError):
         failed_files.add(original_file_path)

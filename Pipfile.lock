@@ -1,0 +1,25 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "3632974aba8dfb2f386888a8b7356b3d550f85565facd0e556e174f68133d94d"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "3.10"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "curlywaffle": {
+            "git": "git+https://github.com/notteddydev/curly-waffle.git",
+            "ref": "e248b8802c8a51e2cee8782c27757b94a47bb727"
+        }
+    },
+    "develop": {}
+}
