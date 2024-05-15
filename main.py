@@ -2,9 +2,10 @@
 
 import os
 import os.path
-import pathlib
 import sys
 import time
+
+from pathlib import Path
 from shutil import copy2, SameFileError
 from modules.get_unique_file_path import get_unique_file_path
 
@@ -27,7 +28,7 @@ print(f'Copying {file_count} file(s) and renaming them...')
 
 failed_files = set()
 for original_file_path in files_to_rename:
-    file_extension = pathlib.Path(original_file_path).suffix
+    file_extension = Path(original_file_path).suffix
     if not file_extension:
         failed_files.add(original_file_path)
         continue
