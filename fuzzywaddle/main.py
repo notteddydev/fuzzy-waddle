@@ -9,13 +9,7 @@ from pathlib import Path
 from shutil import copy2, SameFileError
 from curlywaffle.main import get_unique_file_path
 
-PARENT_DESTINATION_DIR = 'processed_files_dir'
-
-if not os.path.isdir(PARENT_DESTINATION_DIR):
-    os.mkdir(PARENT_DESTINATION_DIR)
-
-print(
-    f'File(s) will be saved to this destination: {os.getcwd()}/{PARENT_DESTINATION_DIR}')
+PARENT_DESTINATION_DIR = f'{os.path.dirname(__file__)}/processed'
 
 files_to_rename = sys.argv[1:]
 file_count = len(files_to_rename)
@@ -33,14 +27,16 @@ for original_file_path in files_to_rename:
         failed_files.add(original_file_path)
         continue
 
-    destination_path = f'{PARENT_DESTINATION_DIR}/{file_extension[1:].lower()}'
-    if not os.path.isdir(destination_path):
-        os.mkdir(destination_path)
+    destination_dir = f'{PARENT_DESTINATION_DIR}/{file_extension[1:].lower()}'
+    if not os.path.isdir(destination_dir):
+        os.mkdir(destination_dir)
 
-    modified_datetime_formatted = time.strftime(
-        "%Y-%m-%d %H.%M.%S", time.strptime(time.ctime(os.path.getmtime(original_file_path))))
+    modified_time_float = os.path.getmtime(original_file_path)
+    modified_timestamp = time.ctime(modified_time_float)
+    modified_datetime_object = time.strptime(modified_timestamp)
+    modified_datetime_formatted = time.strftime("%Y-%m-%d %H.%M.%S", modified_datetime_object)
     
-    proposed_file_path = f'{destination_path}/{modified_datetime_formatted}{file_extension}'
+    proposed_file_path = f'{destination_dir}/{modified_datetime_formatted}{file_extension}'
     try:
         copy2(original_file_path, get_unique_file_path(proposed_file_path))
 
