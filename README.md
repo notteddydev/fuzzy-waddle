@@ -1,4 +1,5 @@
-# Python script for organising files by file type and modification date.
+# fuzzy-waddle
+Python script for organising files by file type and naming them after their modification date.
 
 Example resulting file paths:
 ```bash
